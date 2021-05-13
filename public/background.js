@@ -3,7 +3,7 @@ const before = 5// 5分前に開く
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.name == 'auto_join_meet-meeting') {
         const date = parseInt(request.time) - 5 * 60 * 1000
-        chrome.alarms.create(`${request.name}--${request.time}--${request.id}`, { when: date })
+        chrome.alarms.create(`${request.name}--${request.time}--${request.id}--${request.title}`, { when: date })
     }
     if (request.name == 'auto_join_meet-clearMeeting') {
         chrome.alarms.clearAll()
@@ -11,7 +11,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 
 chrome.alarms.onAlarm.addListener((alarm) => {
-    const [name, time, id] = alarm.name.split('--')
+    const [name, time, id, title] = alarm.name.split('--')
     if (name == 'auto_join_meet-meeting') {
         const url = `https://meet.google.com/${id}`
         chrome.tabs.query({ url: url }, (tabs) => {

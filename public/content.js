@@ -14,7 +14,8 @@ window.onload = () => {
         Array.prototype.slice.call(table.children).filter((_, i) => i%2 === 0).forEach((meeting) => {
             const time = meeting.children[0].children[0].dataset.beginTime
             const id = meeting.children[0].children[0].dataset.callId
-            chrome.runtime.sendMessage({name: 'auto_join_meet-meeting', time: time, id: id})
+            const title = meeting.children[0].children[0].dataset.ariaLabelStatic.split(' ').slice(1, -1).join(' ').slice(0,-1)
+            chrome.runtime.sendMessage({name: 'auto_join_meet-meeting', time: time, id: id, title: title})
         })
     }
 }

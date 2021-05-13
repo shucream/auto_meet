@@ -26,6 +26,6 @@
     ],
     "browser_action": {
         "default_icon": "icon128.png",
-        "default_popup": "popup/build/index.html"
+        "default_popup": "index.html"
     }
 }
